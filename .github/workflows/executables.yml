@@ -48,15 +48,17 @@ jobs:
       uses: actions/download-artifact@v3.0.2
       with:
         path: artifacts
+        
     - run: |
         mkdir dist
-        find -type f -exec mv -t dist {} +
+        find -type f -exec mv -t ./dist {} +
+        
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
         artifactErrorsFailBuild: true
-        artifacts: dist/**/*
+        artifacts: dist/*
         generateReleaseNotes: true
         makeLatest: true
         prerelease: true
