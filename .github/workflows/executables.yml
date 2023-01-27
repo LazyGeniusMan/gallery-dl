@@ -65,12 +65,12 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
-        allowUpdates: true
+        allowUpdates: false
         artifactErrorsFailBuild: true
         artifacts: dist/*
         generateReleaseNotes: true
         makeLatest: "true"
-        prerelease: false
+        prerelease: true
         removeArtifacts: true
         replacesArtifacts: true
         tag: latest
