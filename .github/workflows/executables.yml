@@ -50,8 +50,8 @@ jobs:
         path: artifacts
         
     - run: |
-        mkdir dist
-        find -type f -exec mv -f -t ./dist {} +
+        mkdir dist;
+        find . -type f -exec cp "{}" ./dist  \;
         
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
