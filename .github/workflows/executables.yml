@@ -38,7 +38,7 @@ jobs:
       run: |
         import os, zipfile
         
-        with ZipFile("gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}.zip", "w") as zf:
+        with zipfile.ZipFile("gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}.zip", "w") as zf:
           zf.write(os.path.join("zip", "gallery-dl." + ("exe" if os.name == "nt" else "bin")))
           
     - name: Upload executable
