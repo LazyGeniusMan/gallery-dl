@@ -25,7 +25,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: ${{ matrix.architecture }}
-        cache: pip
 
     - name: Install Dependencies
       run: pip install requests requests[socks] yt-dlp pyinstaller
@@ -38,6 +37,7 @@ jobs:
       run: |
         import os, zipfile
         
+        os.mkdir("zip")
         with zipfile.ZipFile("gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}.zip", "w") as zf:
           zf.write(os.path.join("zip", "gallery-dl." + ("exe" if os.name == "nt" else "bin")))
           
