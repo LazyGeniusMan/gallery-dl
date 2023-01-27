@@ -53,7 +53,7 @@ jobs:
       with:
         allowUpdates: true
         artifactErrorsFailBuild: true
-        artifacts: dist/*
+        artifacts: dist/**/*
         generateReleaseNotes: true
         makeLatest: true
         prerelease: true
