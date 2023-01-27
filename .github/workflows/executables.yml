@@ -44,10 +44,11 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Download a Build Artifact
+    - name: Download Build Artifacts
       uses: actions/download-artifact@v3.0.2
       with:
         path: dist
+    - run: ls -R
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
