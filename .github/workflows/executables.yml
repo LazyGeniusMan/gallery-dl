@@ -36,7 +36,7 @@ jobs:
       shell: python
       run: |
         import os
-        os.rename(src="gallery-dl." + ("exe" if os.name == "nt" else "bin"), dst="gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}." + ("exe" if os.name == "nt" else "bin"), src_dir_fd="dist", dst_dir_fd="dist")
+        os.rename(os.path.join("dist", "gallery-dl." + ("exe" if os.name == "nt" else "bin")), os.path.join("dist", "gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}." + ("exe" if os.name == "nt" else "bin")))
           
     - name: Upload executable
       uses: actions/upload-artifact@v3
@@ -65,6 +65,7 @@ jobs:
         allowUpdates: true
         artifactErrorsFailBuild: true
         artifacts: dist/*
+        body: Latest commit executables
         generateReleaseNotes: true
         makeLatest: "true"
         prerelease: true
