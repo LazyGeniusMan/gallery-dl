@@ -47,8 +47,10 @@ jobs:
     - name: Download Build Artifacts
       uses: actions/download-artifact@v3.0.2
       with:
-        path: dist
-    - run: find -type f -exec mv -t dist {} +
+        path: artifacts
+    - run: |
+        mkdir dist
+        find -type f -exec mv -t dist {} +
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
