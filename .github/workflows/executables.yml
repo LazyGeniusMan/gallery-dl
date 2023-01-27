@@ -32,20 +32,17 @@ jobs:
     - name: Build executable
       run: python scripts/pyinstaller.py
     
-    - name: Archive executable
+    - name: Rename executable
       shell: python
       run: |
-        import os, zipfile
-        
-        os.mkdir("zip")
-        with zipfile.ZipFile(os.path.join("zip", "gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}.zip"), "w") as zf:
-          zf.write(os.path.join("dist", "gallery-dl." + ("exe" if os.name == "nt" else "bin")))
+        import os
+        os.rename("gallery-dl." + ("exe" if os.name == "nt" else "bin"), "gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}." + ("exe" if os.name == "nt" else "bin"), "dist", "dist")
           
     - name: Upload executable
       uses: actions/upload-artifact@v3
       with:
         name: gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}
-        path: zip/*
+        path: dist/*
 
   release:
     runs-on: ubuntu-latest
