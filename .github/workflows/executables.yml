@@ -51,7 +51,7 @@ jobs:
         
     - run: |
         mkdir dist
-        find -type f -exec cp -t ./dist {} +
+        find -type f -exec mv -f -t ./dist {} +
         
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
