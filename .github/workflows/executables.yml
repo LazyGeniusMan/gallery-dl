@@ -25,19 +25,27 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: ${{ matrix.architecture }}
+        cache: pip
 
+    - name: Install Dependencies
+      run: pip install requests requests[socks] yt-dlp pyinstaller
+      
     - name: Build executable
+      run: python scripts/pyinstaller.py
+    
+    - name: Archive executable
+      shell: python
       run: |
-        pip install requests requests[socks] yt-dlp pyinstaller
-        python scripts/pyinstaller.py
-        zip -j gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }} dist/*
+        import os, zipfile
         
+        with ZipFile("gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}.zip", "w") as zf:
+          zf.write(os.path.join("zip", "gallery-dl." + ("exe" if os.name == "nt" else "bin")))
+          
     - name: Upload executable
       uses: actions/upload-artifact@v3
       with:
         name: gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}
-        path: |
-          dist
+        path: zip/*
 
   release:
     runs-on: ubuntu-latest
@@ -51,8 +59,8 @@ jobs:
         path: artifacts
         
     - run: |
-        mkdir dist;
-        find . -type f -exec cp "{}" ./dist  \;
+        mkdir dist
+        find . -type f -exec mv "{}" ./dist
         
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
