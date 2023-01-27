@@ -30,10 +30,22 @@ jobs:
       run: |
         pip install requests requests[socks] yt-dlp pyinstaller
         python scripts/pyinstaller.py
-
     - name: Upload executable
       uses: actions/upload-artifact@v3
       with:
         name: gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}
         path: |
           dist
+    - name: Create Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        allowUpdates: true
+        artifactErrorsFailBuild: true
+        artifacts: dist/**
+        generateReleaseNotes: true
+        makeLatest: true
+        prerelease: true
+        removeArtifacts: true
+        replacesArtifacts: true
+        tag: latest
+        updateOnlyUnreleased: true
