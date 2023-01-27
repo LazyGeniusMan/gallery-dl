@@ -70,7 +70,7 @@ jobs:
         artifacts: dist/*
         generateReleaseNotes: true
         makeLatest: "true"
-        prerelease: true
+        prerelease: false
         removeArtifacts: true
         replacesArtifacts: true
         tag: latest
