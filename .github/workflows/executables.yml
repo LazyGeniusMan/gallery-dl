@@ -26,7 +26,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
         architecture: ${{ matrix.architecture }}
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: pip install requests requests[socks] yt-dlp pyinstaller
       
     - name: Build executable
