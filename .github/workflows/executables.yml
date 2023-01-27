@@ -30,6 +30,7 @@ jobs:
       run: |
         pip install requests requests[socks] yt-dlp pyinstaller
         python scripts/pyinstaller.py
+        zip -j gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }} dist/*
         
     - name: Upload executable
       uses: actions/upload-artifact@v3
