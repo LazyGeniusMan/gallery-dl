@@ -6,8 +6,6 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -32,12 +30,20 @@ jobs:
       run: |
         pip install requests requests[socks] yt-dlp pyinstaller
         python scripts/pyinstaller.py
+        
     - name: Upload executable
       uses: actions/upload-artifact@v3
       with:
         name: gallery-dl-${{ matrix.os }}-${{ matrix.architecture }}-${{ matrix.python-version }}
         path: |
           dist
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+    steps:
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
