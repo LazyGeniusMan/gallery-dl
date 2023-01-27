@@ -65,7 +65,7 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
-        allowUpdates: false
+        allowUpdates: true
         artifactErrorsFailBuild: true
         artifacts: dist/*
         generateReleaseNotes: true
