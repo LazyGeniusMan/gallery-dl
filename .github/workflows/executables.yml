@@ -60,7 +60,7 @@ jobs:
         
     - run: |
         mkdir dist
-        find . -type f -exec mv "{}" ./dist
+        find . -type f -exec mv "{}" ./dist \;
         
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
