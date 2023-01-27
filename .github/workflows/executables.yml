@@ -65,7 +65,7 @@ jobs:
         allowUpdates: true
         artifactErrorsFailBuild: true
         artifacts: dist/*
-        body: Executable for commit: ${{ github.ref }}
+        body: "Executable based on commit ${{ github.ref }}"
         generateReleaseNotes: true
         makeLatest: "true"
         prerelease: true
